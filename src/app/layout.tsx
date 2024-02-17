@@ -1,9 +1,7 @@
-"use client"
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { Header } from "app/components/Header";
 
+import { Inter } from "next/font/google";
+import { Header } from "app/components/Shared/Header";
+import { Footer } from "app/components/Shared/Footer"; // al importarse como objeto nos ayuda con mayor info al romperse el componete
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
@@ -11,12 +9,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  console.log("hola mundo layout")
   return (
     <html lang="en">
-      <Header/>
       <body className={inter.className}>
+        <Header/>  
         {children}
+        <Footer/>
       </body>
     </html>
   );
