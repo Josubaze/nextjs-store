@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
@@ -21,8 +22,15 @@ export default function RootLayout({
         <header>
           <nav>
             <ul>
+              //Elemento Link para una NAVEGACIÓN + fluida, para evitar recargar la página
+              <Link href="/"> // utilizada para navegación interna, "a" se recomienda para externa
               <li>Home</li>
+              </Link>
+              
+              <Link href="/store">
               <li>Store </li>
+              </Link>
+
             </ul>
           </nav>
         </header>
