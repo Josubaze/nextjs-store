@@ -22,8 +22,8 @@ export default function RootLayout({
         <header>
           <nav>
             <ul>
-              //Elemento Link para una NAVEGACIÓN + fluida, para evitar recargar la página
-              <Link href="/"> // utilizada para navegación interna, "a" se recomienda para externa
+              {/* Elemento Link para una NAVEGACIÓN + fluida, para evitar recargar la página  */}
+              <Link href="/"> {/* utilizada para navegación interna, "a" se recomienda para externo */}
               <li>Home</li>
               </Link>
               
