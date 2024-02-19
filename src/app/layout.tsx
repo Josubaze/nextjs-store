@@ -2,6 +2,7 @@
 import { Inter } from "next/font/google";
 import { Header } from "app/components/Shared/Header";
 import { Footer } from "app/components/Shared/Footer"; // al importarse como objeto nos ayuda con mayor info al romperse el componete
+import "./../sass/globals.sass";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
