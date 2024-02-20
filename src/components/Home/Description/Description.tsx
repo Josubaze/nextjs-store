@@ -29,6 +29,7 @@ export const Descrition = () =>  {
                         src="/images/description.jpeg"
                         alt="products marketplace"
                         fill
+                        sizes="(max-width: 500px) 100vw, 500px" // si no se define da advertencia
                         placeholder='blur'
                         blurDataURL= {PLACEHOLDER_IMAGE}
                     />
