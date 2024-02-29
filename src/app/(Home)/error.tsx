@@ -1,6 +1,6 @@
 "use client"
 import Image from 'next/image'
-import style from './../../sass/global-error.module.sass'
+import style from 'src/sass/global-error.module.sass'
 
 export default function Error(props: ErrorPageProps){
     return (

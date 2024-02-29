@@ -1,7 +1,7 @@
 "use client"
 
-import { Descrition } from "app/components/Home/Description";
-import { Hero } from "app/components/Home/Hero";
+import { Descrition } from "src/components/Home/Description";
+import { Hero } from "src/components/Home/Hero";
 
 
 export default function HomeLayout( {children} : {children: React.ReactNode}) {

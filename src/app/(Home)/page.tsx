@@ -1,5 +1,5 @@
 
-import { MainProducts } from "app/components/Home/MainProducts";
+import { MainProducts } from "src/components/Home/MainProducts";
 
 export default function Home() {
   return (
