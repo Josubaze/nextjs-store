@@ -1,11 +1,11 @@
-interface ProductPageProps{
-    searchParams: {
-        id: string
-    }
-}
+"use client"
 
-export default async function ProductPage(props: ProductPageProps){
-    console.log(props.searchParams.id);
+import { useParams, useSearchParams } from "next/navigation";
+
+export default function ProductPage(){
+    const searchParams = useSearchParams(); 
+    const id = searchParams.get('id');
+    console.log(`searchparams: ${searchParams}`);
     return(
         <div>
             <h1>Product Page</h1>
