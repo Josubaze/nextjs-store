@@ -40,10 +40,10 @@ export const getMainProducts = async () => {
         'X-Shopify-Access-Token': env.SHOPIFY_TOKEN
     }),
 
-     //cache: 'force-cache' // por default cache
-    //cache: 'no-cache' //  sin cache
+    cache: 'force-cache',
+
     next: {
-        revalidate: 10, // se revalida el cache cada 10s
+        tags: ['main-products']
     }
 
     })
