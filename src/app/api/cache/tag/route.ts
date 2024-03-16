@@ -1,7 +1,7 @@
 import { revalidateTag } from "next/cache";
 import { env } from "src/app/config/env";
 
-export async function POST(request: Request){
+export async function POST(request: Request){ // 
     const body = await request.json();
 
     const { tag, token } = body;
