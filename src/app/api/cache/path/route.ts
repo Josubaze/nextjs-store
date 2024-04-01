@@ -1,5 +1,5 @@
 import { revalidatePath } from "next/cache";
-import { env } from "src/app/config/env";
+import { env } from "src/config/env";
 
 export async function POST(request: Request){ // invalida el cache para un url
     const body = await request.json();
