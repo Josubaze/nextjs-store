@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import styles from "./NewAccountForm.module.sass";
-import { handlerCreateUser } from "app/actions";
+import { handlerCreateUser } from "src/actions";
 
 export const NewAccountForm = () => {
 
