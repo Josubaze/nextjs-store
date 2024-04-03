@@ -22,3 +22,10 @@ interface CategoriesProps{
         searchParams?: string, //el ? indica que opcional en ts
     }
 }
+
+interface CartItem {
+    title: string;
+    price: number;
+    quantity: number;
+    id: string;
+}
