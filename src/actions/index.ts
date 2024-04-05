@@ -3,6 +3,9 @@ import { redirect } from "next/navigation";
 import { GraphQLClientSingleton } from "src/graphql"
 import { createUserMutation } from "src/graphql/mutations/createUserMutation";
 import { createAccessToken } from "src/utils/auth/createAccessToken";
+import { cookies } from "next/headers"
+import { validateAccessToken } from "src/utils/auth/validateAccessToken";
+import { createCartMutation } from "src/graphql/mutations/createCartMutation";
 
  // Server Actions , evita que se renderice en el cliente
 
@@ -36,3 +39,35 @@ export const handlerLogin = async (formData: FormData) => {
         redirect("/store");
     }
 }
+
+export const handleCreateCart = async (items: CartItem[]) => {
+    const cookiesStore = cookies()
+    const accesToken = cookiesStore.get('accessToken')?.value as string
+  
+    if(!accesToken) redirect('/login')
+  
+    const graphqlClient = GraphQLClientSingleton.getInstance().getClient()
+    const customer = await validateAccessToken()
+    const variables = {
+      input: {
+        buyerIdentity: {
+          customerAccessToken: accesToken,
+          email: customer?.email
+        },
+        lines: items.map(item => ({
+          merchandiseId: item.merchandiseId,
+          quantity: item.quantity
+        }))
+      }
+    }
+  
+    const { cartCreate }: {
+      cartCreate?: {
+        cart?: {
+          checkoutUrl: string
+        }
+      }
+    } = await graphqlClient.request(createCartMutation, variables)
+  
+    return cartCreate?.cart?.checkoutUrl
+  }

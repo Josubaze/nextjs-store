@@ -5,7 +5,14 @@ interface ErrorPageProps {
 
 }
 
-interface ProductType {
+interface CategoriesProps{
+    params: {
+        categories: string[],
+        searchParams?: string, //el ? indica que opcional en ts
+    }
+}
+
+type ProductType = {
     id: string;
     title: string;
     description: string;
@@ -14,18 +21,14 @@ interface ProductType {
     quantity: number;
     handle: string;
     tags: string;
-}
+    gql_id: string;
+};
 
-interface CategoriesProps{
-    params: {
-        categories: string[],
-        searchParams?: string, //el ? indica que opcional en ts
-    }
-}
-
-interface CartItem {
+type CartItem = {
     title: string;
     price: number;
     quantity: number;
     id: string;
+    image: string;
+    merchandiseId: string;
 }
