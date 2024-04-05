@@ -68,6 +68,6 @@ export const handleCreateCart = async (items: CartItem[]) => {
         }
       }
     } = await graphqlClient.request(createCartMutation, variables)
-  
+
     return cartCreate?.cart?.checkoutUrl
   }
