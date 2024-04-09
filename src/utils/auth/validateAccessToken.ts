@@ -11,7 +11,7 @@ export const validateAccessToken = async () => {
     return null;
  }else{
     const graphqlClient = GraphQLClientSingleton.getInstance().getClient();
-    const { customer } = await graphqlClient.request(customerName, { customerAccessToken: accessToken });
+    const { customer } = await graphqlClient.request<any>(customerName, { customerAccessToken: accessToken });
     return customer;
  }
 }
