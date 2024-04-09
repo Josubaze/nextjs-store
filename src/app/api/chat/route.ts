@@ -1,33 +1,28 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
-import { GoogleGenerativeAIStream, Message, StreamingTextResponse } from 'ai';
+import OpenAI from 'openai';
+import { OpenAIStream, StreamingTextResponse } from 'ai';
  
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY || '');
- 
+// Create an OpenAI API client (that's edge friendly!)
+// but configure it to point to fireworks.ai
+const fireworks = new OpenAI({
+  apiKey: process.env.FIREWORKS_API_KEY || '',
+  baseURL: 'https://api.fireworks.ai/inference/v1',
+});
 // IMPORTANT! Set the runtime to edge
 export const runtime = 'edge';
- 
-// convert messages from the Vercel AI SDK Format to the format
-// that is expected by the Google GenAI SDK
-const buildGoogleGenAIPrompt = (messages: Message[]) => ({
-  contents: messages
-    .filter(message => message.role === 'user' || message.role === 'assistant')
-    .map(message => ({
-      role: message.role === 'user' ? 'user' : 'model',
-      parts: [{ text: message.content }],
-    })),
-});
- 
 export async function POST(req: Request) {
-  // Extract the `prompt` from the body of the request
+  // Extract the `messages` from the body of the request
   const { messages } = await req.json();
  
-  const geminiStream = await genAI
-    .getGenerativeModel({ model: 'gemini-pro' })
-    .generateContentStream(buildGoogleGenAIPrompt(messages));
- 
-  // Convert the response into a friendly text-stream
-  const stream = GoogleGenerativeAIStream(geminiStream);
- 
+  // Ask Fireworks for a streaming chat completion using Llama 2 70b model
+  // @see https://app.fireworks.ai/models/fireworks/llama-v2-70b-chat
+  const response = await fireworks.chat.completions.create({
+    model: 'accounts/fireworks/models/llama-v2-70b-chat',
+    stream: true,
+    max_tokens: 1000,
+    messages,
+  });
+  // Convert the response into a friendly text-stream.
+  const stream = OpenAIStream(response);
   // Respond with the stream
   return new StreamingTextResponse(stream);
 }
