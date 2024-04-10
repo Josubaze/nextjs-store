@@ -3,6 +3,7 @@ import Link from "next/link"
 import styles from './StoreLayout.module.sass'
 import { getCollections } from "src/services/shopify/collections"
 
+export const runtime = "edge";
 export default async function Layout({ children }: { children: React.ReactNode }) {
   const collections = await getCollections();
 

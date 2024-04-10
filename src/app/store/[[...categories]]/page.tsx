@@ -1,6 +1,7 @@
 import { ProductsWrapper } from "src/components/Store/ProductsWrapper";
 import { getCollections, getCollectionsProducts } from "src/services/shopify/collections";
 import { getProducts } from "src/services/shopify/products";
+
 export default async function Category(props: CategoriesProps) {
 
     const { categories } = props.params;
