@@ -2,11 +2,10 @@
 import Link from "next/link"
 import styles from './StoreLayout.module.sass'
 import { getCollections } from "src/services/shopify/collections"
+import { ChatLink } from "src/components/Store/ChatLink";
 
-export const runtime = "edge";
 export default async function Layout({ children }: { children: React.ReactNode }) {
   const collections = await getCollections();
-
   return (
     <main className={styles.StoreLayout}>
       <h1>Explore</h1>
@@ -20,6 +19,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
             ))
           }
         </ul>
+      <ChatLink />
       </nav>
       {children}
     </main>

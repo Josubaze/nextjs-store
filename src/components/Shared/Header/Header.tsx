@@ -23,10 +23,20 @@ export const Header = async () => {
               Store
             </Link>
           </li>
+          <li>
+            <Link href="/chat">
+            Vergil
+            </Link>
+            ✨
+          </li>
         </ul>
       </nav>
       <div className={styles.Header__user}>
-        {customer?.firstName ? (<p>Hola! {customer.firstName}</p>) : (<Link href="/login">Login</Link>)}
+        {customer?.firstName ? (<p>Hola! {customer.firstName}</p>) : (
+        <>
+        <Link href="/login">Login</Link>
+        <Link href="/signup">Signup</Link>
+        </>)}
         <NoSSRShoppingCart />
       </div>
     </header>)

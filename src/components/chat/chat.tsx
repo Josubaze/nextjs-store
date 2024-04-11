@@ -1,7 +1,6 @@
 'use client';
- 
 import { useChat } from 'ai/react';
-import styles from "./chat.module.sass";
+import styles from './Chat.module.sass';
 
 export const Chat = (props: { agent: string }) => {
   const { messages, input, handleInputChange, handleSubmit } = useChat({
@@ -9,33 +8,46 @@ export const Chat = (props: { agent: string }) => {
       {
         id: '1',
         role: 'system',
-        content: props.agent,
+        content: props.agent
       }
     ],
   });
- 
+
   return (
-    <>
-    <h1 className={styles.chat_title}>ChatBot</h1>
-    <div className={styles.chat_container}>
-      {
-        messages
-        .filter(m => m.role !== 'system')
-        .map(m => (
-        <div key={m.id} className={styles.chat_container__message}>
-          {m.role === 'user' ? 'User: ' : 'AI: '}
-          {m.content}
-        </div>
-      ))}
- 
-      <form onSubmit={handleSubmit} className={styles.chat_container__form}>
+    <main className={styles.Chat} >
+      <h1 className={styles.Chat__title}>VERGIL</h1>
+      <p className={styles.Chat__description}>Pregunte sobre nuestros producto a VERGIL 🤖</p>
+      <form onSubmit={handleSubmit} className={styles.Chat__form}>
         <input
+          className={styles.Chat__input}
           value={input}
-          placeholder="Escribe aqui..."
           onChange={handleInputChange}
+          placeholder="¿Que le gustaria comprar?"
         />
+        <button
+          className={styles.Chat__button}
+        >
+          Enviar
+        </button>
       </form>
-    </div>
-    </>
+      <section className={styles.Chat__messages}>
+        {messages
+          .filter(m => m.role !== 'system')
+          .map(m => {
+            return (
+              <span key={m.id} className={styles.Chat__message}>
+                <div className={styles.Chat__message__icon}>
+                  {m.role === "assistant" ? "🤖" : "🧑🏽‍🦱"}
+                </div>
+                <div>
+                  {m.content}
+                </div>
+              </span>
+            )
+          }
+
+          )}
+      </section>
+    </main>
   );
 }
